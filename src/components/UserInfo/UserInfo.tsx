@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import dict from '../../data/dict';
 import { ApiUserInfo } from '../../data/interfaces';
 import s from './UserInfo.module.scss';

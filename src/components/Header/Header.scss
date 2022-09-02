@@ -86,7 +86,7 @@
     background-color: $blue-dark;
     background-image: linear-gradient(45deg, $blue-trello 0%, $blue-dark 74%);
     gap: 1px;
-    align-items: end;
+    align-items: flex-end;
     padding: 46px 15px 10px 10px;
     right: -105vw;
   }

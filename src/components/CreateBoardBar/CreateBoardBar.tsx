@@ -3,7 +3,7 @@ import React, { Dispatch, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import { SET_BOARDS, titleRegex } from '../../data/constants';
 import getBoards from '../../api/getBoards';
 import createBoard from '../../api/createBoard';

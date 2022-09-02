@@ -1,9 +1,9 @@
 import jwtDecode from 'jwt-decode';
-import { API_URL } from '../data/constants';
+import { API_URL, LS_TOKEN_KEY } from '../data/constants';
 import dict from '../data/dict';
 import { ApiUserInfo, JwtToken, Languages } from '../data/interfaces';
 import { toastErrorDark, toastWarnDark } from '../utils/toast';
-import tokenIsExpired from '../utils/tokenIsExpired';
+import tokenIsExpired from '../utils/token';
 
 const validateUser = async (
   logoutUser: () => void,
@@ -11,7 +11,7 @@ const validateUser = async (
   lang: Languages
 ) => {
   setSpinner(true);
-  const token = localStorage.getItem('pmapp34-token') || '';
+  const token = localStorage.getItem(LS_TOKEN_KEY) || '';
   const logoutAndStopSpinner = () => {
     setSpinner(false);
     logoutUser();

@@ -233,12 +233,15 @@
       flex-wrap: wrap;
       justify-content: flex-start;
       align-items: center;
-      height: 460px;
+      min-height: 240px;
       li {
         line-height: 1.4em;
       }
       .pers-card-name {
         text-transform: uppercase;
+        i {
+          margin-left: 5px;
+        }
       }
       .pers-card-photo {
         width: 200px;

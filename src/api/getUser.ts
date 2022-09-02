@@ -1,11 +1,11 @@
-import { API_URL } from '../data/constants';
+import { API_URL, LS_TOKEN_KEY } from '../data/constants';
 import dict from '../data/dict';
 import { ApiUserInfo, Languages } from '../data/interfaces';
 import { toastErrorDark, toastWarnDark } from '../utils/toast';
 
 export default async function getUser(id: string, logoutUser: () => void, lang: Languages) {
   const url = `${API_URL}/users/${id}`;
-  const token = localStorage.getItem('pmapp34-token') || '';
+  const token = localStorage.getItem(LS_TOKEN_KEY) || '';
 
   if (!token) {
     toastErrorDark(dict[lang].toastInvToken);

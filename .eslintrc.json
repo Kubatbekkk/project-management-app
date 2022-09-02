@@ -17,6 +17,7 @@
     }
   },
   "rules": {
+    "react/function-component-definition": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "react/self-closing-comp": "off",
     "react/jsx-props-no-spreading": "off",
@@ -54,7 +55,8 @@
   "env": {
     "browser": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "node": true
   },
   "root": true
 }

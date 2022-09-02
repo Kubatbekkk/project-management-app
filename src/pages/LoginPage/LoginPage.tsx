@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from 'react';
 import { useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { FORM_TIMEOUT, LS_TOKEN_KEY } from 'data/constants';
 import './LoginPage.scss';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import getToken from '../../api/getToken';
 import loginWithToken from '../../api/loginWithToken';
 import getResponseOnCreatingUser from '../../api/getResponseOnCreatingUser';
-import IS_PASSWORD_VALID from '../../utils/isPasswordValid';
-import IS_NAME_OR_LOGIN_VALID from '../../utils/isNameOrLoginValid';
+import isPassValid, { isNameLoginValid } from '../../utils/validation';
 import dict from '../../data/dict';
 
 function LoginPage() {
@@ -24,7 +24,7 @@ function LoginPage() {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   useEffect(() => {
-    if (isAuth && localStorage.getItem('pmapp34-token')) {
+    if (isAuth && localStorage.getItem(LS_TOKEN_KEY)) {
       navigate('/');
     }
   }, [isAuth]);
@@ -44,13 +44,13 @@ function LoginPage() {
   const createUser = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     setButtonDisabled(true);
-    setTimeout(() => setButtonDisabled(false), 1500);
+    setTimeout(() => setButtonDisabled(false), FORM_TIMEOUT);
     const isInputDataValid =
-      IS_NAME_OR_LOGIN_VALID(name) && IS_NAME_OR_LOGIN_VALID(login) && IS_PASSWORD_VALID(password);
+      isNameLoginValid(name) && isNameLoginValid(login) && isPassValid(password);
     if (!isInputDataValid) {
-      setIsNameValid(IS_NAME_OR_LOGIN_VALID(name));
-      setIsLoginValid(IS_NAME_OR_LOGIN_VALID(login));
-      setIsPasswordValid(IS_PASSWORD_VALID(password));
+      setIsNameValid(isNameLoginValid(name));
+      setIsLoginValid(isNameLoginValid(login));
+      setIsPasswordValid(isPassValid(password));
       return;
     }
     const response = await getResponseOnCreatingUser(name, login, password, setSpinner, lang);
@@ -64,11 +64,11 @@ function LoginPage() {
   const logIn = async (e: React.MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
     setButtonDisabled(true);
-    setTimeout(() => setButtonDisabled(false), 1500);
-    const isInputDataValid = IS_NAME_OR_LOGIN_VALID(login) && IS_PASSWORD_VALID(password);
+    setTimeout(() => setButtonDisabled(false), FORM_TIMEOUT);
+    const isInputDataValid = isNameLoginValid(login) && isPassValid(password);
     if (!isInputDataValid) {
-      setIsLoginValid(IS_NAME_OR_LOGIN_VALID(login));
-      setIsPasswordValid(IS_PASSWORD_VALID(password));
+      setIsLoginValid(isNameLoginValid(login));
+      setIsPasswordValid(isPassValid(password));
       return;
     }
     const token = await getToken(login, password, setSpinner, lang);

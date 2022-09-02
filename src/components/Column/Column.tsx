@@ -4,8 +4,9 @@ import {
   DraggableProvidedDragHandleProps,
   Droppable,
 } from 'react-beautiful-dnd';
+import { AppContext } from 'store/storeWrapper';
 import deleteColumn from '../../api/deleteColumn';
-import { AppContext } from '../../App';
+
 import dict from '../../data/dict';
 import { TaskResponse } from '../../data/interfaces';
 import CreateTaskModal from '../CreateTaskModal/CreateTaskModal';

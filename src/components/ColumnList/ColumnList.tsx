@@ -6,12 +6,12 @@ import {
   DropResult,
   DraggableProvidedDragHandleProps,
 } from 'react-beautiful-dnd';
+import { AppContext } from 'store/storeWrapper';
 import { ColumnsResponse } from '../../data/interfaces';
 import CreateColumnModal from '../CreateColumnModal/CreateColumnModal';
 import './ColumnList.scss';
 import Column from '../Column/Column';
 import dict from '../../data/dict';
-import { AppContext } from '../../App';
 
 function ColumnList({
   boardId,

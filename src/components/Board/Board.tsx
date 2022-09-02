@@ -1,8 +1,9 @@
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { AppContext } from 'store/storeWrapper';
 import deleteBoard from '../../api/deleteBoard';
 import getBoards from '../../api/getBoards';
-import { AppContext } from '../../App';
+
 import { SET_BOARDS } from '../../data/constants';
 import dict from '../../data/dict';
 import { BoardsResponse } from '../../data/interfaces';

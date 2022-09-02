@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { AppContext } from '../../App';
-import { LANG_EN, LANG_RU } from '../../data/constants';
+import { AppContext } from 'store/storeWrapper';
+import { LANG_EN, LANG_RU, LS_LANG_KEY } from '../../data/constants';
 import './Header.scss';
 import CreateBoardBar from '../CreateBoardBar/CreateBoardBar';
 import dict from '../../data/dict';
@@ -15,10 +15,10 @@ function Header() {
   const changeLang = () => {
     if (lang === LANG_RU) {
       switchLang(LANG_EN);
-      localStorage.setItem('pmapp34-lang', LANG_EN);
+      localStorage.setItem(LS_LANG_KEY, LANG_EN);
     } else if (lang === LANG_EN) {
       switchLang(LANG_RU);
-      localStorage.setItem('pmapp34-lang', LANG_RU);
+      localStorage.setItem(LS_LANG_KEY, LANG_RU);
     }
   };
 

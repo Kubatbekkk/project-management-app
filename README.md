@@ -9,7 +9,7 @@
 
 ## Deploy
 
-https://pm-app-34.netlify.app
+https://pm-app-34.vercel.app/
 
 ## Downloading
 
@@ -20,9 +20,16 @@ https://pm-app-34.netlify.app
 ```
 cd project-management-app
 
-git checkout develop
+git checkout dev
 
 npm install
 
 npm start
+```
+
+To update packages use:
+
+```
+npx npm-check-updates -u
+npm i
 ```

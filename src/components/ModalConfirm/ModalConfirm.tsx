@@ -1,6 +1,6 @@
 import { MouseEvent, useContext } from 'react';
 import { createPortal } from 'react-dom';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import dict from '../../data/dict';
 import { ModalConfirmation } from '../../data/interfaces';
 import './ModalConfirm.scss';

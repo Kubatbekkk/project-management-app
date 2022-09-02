@@ -12,3 +12,8 @@ export const SET_BOARDS = 'SET_BOARDS';
 
 export const FORM_INVALID_MESSAGE = 'at least one character';
 export const titleRegex = /^.*[^\s].*$/;
+
+export const FORM_TIMEOUT = 1500;
+
+export const LS_LANG_KEY = 'pmapp34-lang';
+export const LS_TOKEN_KEY = 'pmapp34-token';

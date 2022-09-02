@@ -1,5 +1,5 @@
 import React, { createRef, useContext, useEffect, useState } from 'react';
-import { AppContext } from '../../../App';
+import { AppContext } from 'store/storeWrapper';
 import updateColumn from '../../../api/updateColumn';
 import ModalConfirm from '../../ModalConfirm/ModalConfirm';
 import dict from '../../../data/dict';

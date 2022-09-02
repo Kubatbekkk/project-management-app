@@ -1,6 +1,6 @@
 import React, { createRef, Dispatch, useContext, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import { TaskResponse, ApiUserInfo } from '../../data/interfaces';
 import updateTask from '../../api/updateTask';
 import getAllUsers from '../../api/getAllUsers';

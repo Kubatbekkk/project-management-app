@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../App';
-import { SET_BOARDS } from '../../data/constants';
+import { AppContext } from 'store/storeWrapper';
+import { LS_TOKEN_KEY, SET_BOARDS } from '../../data/constants';
 import getBoards from '../../api/getBoards';
 import Board from '../Board/Board';
 import dict from '../../data/dict';
@@ -18,7 +18,7 @@ function BoardList() {
   };
 
   useEffect(() => {
-    if (!isAuth && !localStorage.getItem('pmapp34-token')) {
+    if (!isAuth && !localStorage.getItem(LS_TOKEN_KEY)) {
       navigate('/welcome');
     } else {
       loadBoards();

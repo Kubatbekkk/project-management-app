@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import dict from '../../data/dict';
 import './WelcomePage.scss';
 
@@ -91,17 +91,16 @@ function WelcomePage() {
           <div className="team-wrapper">
             <div className="pers-card-wrapper">
               <h3 className="pers-card-name">
-                {dict[lang].welcomePage.teamName1}
                 <a
                   href="https://github.com/tlkv"
                   target="_blank"
                   rel="noreferrer"
                   className="pers-card-link"
                 >
+                  {dict[lang].welcomePage.teamName1}
                   <i className="fa-brands fa-github" />
                 </a>
               </h3>
-              <div className="pers-card-photo pers-photo-1"></div>
               <div className="pers-card-details">
                 <div className="pers-card-done">
                   <ul>
@@ -116,17 +115,16 @@ function WelcomePage() {
             </div>
             <div className="pers-card-wrapper">
               <h3 className="pers-card-name">
-                {dict[lang].welcomePage.teamName2}
                 <a
                   href="https://github.com/deftonjke"
                   target="_blank"
                   rel="noreferrer"
                   className="pers-card-link"
                 >
+                  {dict[lang].welcomePage.teamName2}
                   <i className="fa-brands fa-github" />
                 </a>
               </h3>
-              <div className="pers-card-photo pers-photo-2"></div>
               <div className="pers-card-details">
                 <div className="pers-card-done">
                   <ul>

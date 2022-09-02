@@ -1,7 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { FORM_TIMEOUT, LS_TOKEN_KEY } from 'data/constants';
 import './SearchPage.scss';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import getAllTasks from '../../api/getAllTasks';
 import { SearchTaskResponse } from '../../data/interfaces';
 import SearchTaskInfo from '../../components/SearchTaskInfo/SearchTaskInfo';
@@ -15,7 +16,7 @@ export default function SearchPage() {
   const [isButtonDisabled, setButtonDisabled] = useState(false);
 
   useEffect(() => {
-    if (!isAuth && !localStorage.getItem('pmapp34-token')) {
+    if (!isAuth && !localStorage.getItem(LS_TOKEN_KEY)) {
       navigate('/welcome');
     }
   }, [isAuth]);
@@ -42,7 +43,7 @@ export default function SearchPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setButtonDisabled(true);
-    setTimeout(() => setButtonDisabled(false), 1500);
+    setTimeout(() => setButtonDisabled(false), FORM_TIMEOUT);
     loadTasks();
   };
 

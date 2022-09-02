@@ -1,4 +1,4 @@
-import { API_URL } from '../data/constants';
+import { API_URL, LS_TOKEN_KEY } from '../data/constants';
 import dict from '../data/dict';
 import { ColumnsResponse, Languages } from '../data/interfaces';
 import { toastErrorDark, toastWarnDark } from '../utils/toast';
@@ -10,7 +10,7 @@ export default async function getColumnSingle(
   lang: Languages
 ) {
   const url = `${API_URL}/boards/${boardId}/columns/${columnId}`;
-  const token = localStorage.getItem('pmapp34-token') || '';
+  const token = localStorage.getItem(LS_TOKEN_KEY) || '';
 
   if (!token) {
     toastErrorDark(dict[lang].toastInvToken);

@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import { AppContext } from 'store/storeWrapper';
 import deleteTask from '../../../api/deleteTask';
 import validateUser from '../../../api/_validateUser';
-import { AppContext } from '../../../App';
 import dict from '../../../data/dict';
 import { TaskResponse } from '../../../data/interfaces';
 import { toastWarnDark } from '../../../utils/toast';

@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
+import { AppContext } from 'store/storeWrapper';
 import deleteTask from '../../api/deleteTask';
 import validateUser from '../../api/_validateUser';
-import { AppContext } from '../../App';
 import dict from '../../data/dict';
 
 import { SearchTaskCard } from '../../data/interfaces';

@@ -2,12 +2,12 @@ import './ProfilePage.scss';
 import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { AppContext } from '../../App';
+import { AppContext } from 'store/storeWrapper';
 import { ApiUserQuery } from '../../data/interfaces';
 import updateUser from '../../api/updateUser';
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm';
 import deleteUser from '../../api/deleteUser';
-import { passRegExp, userRegExp } from '../../data/constants';
+import { FORM_TIMEOUT, LS_TOKEN_KEY, passRegExp, userRegExp } from '../../data/constants';
 import UserInfo from '../../components/UserInfo/UserInfo';
 import validateUser from '../../api/_validateUser';
 import dict from '../../data/dict';
@@ -39,7 +39,7 @@ function ProfilePage() {
   };
 
   useEffect(() => {
-    if (!isAuth && !localStorage.getItem('pmapp34-token')) {
+    if (!isAuth && !localStorage.getItem(LS_TOKEN_KEY)) {
       navigate('/welcome');
     } else {
       handleCurrentUser();
@@ -48,7 +48,7 @@ function ProfilePage() {
 
   const onSubmit = handleSubmit(async ({ name, login, password }) => {
     setButtonDisabled(true);
-    setTimeout(() => setButtonDisabled(false), 1500);
+    setTimeout(() => setButtonDisabled(false), FORM_TIMEOUT);
     const result = await updateUser(name, login, password, logoutUser, setSpinner, lang);
     if (result) {
       setCurrName(name);
