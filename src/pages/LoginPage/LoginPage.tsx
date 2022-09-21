@@ -3,6 +3,7 @@ import { useLocation, useNavigate, NavLink } from 'react-router-dom';
 import { FORM_TIMEOUT, LS_TOKEN_KEY } from 'data/constants';
 import './LoginPage.scss';
 import { AppContext } from 'store/storeWrapper';
+import { motion } from 'framer-motion';
 import getToken from '../../api/getToken';
 import loginWithToken from '../../api/loginWithToken';
 import getResponseOnCreatingUser from '../../api/getResponseOnCreatingUser';
@@ -79,97 +80,104 @@ function LoginPage() {
   };
 
   return (
-    <div className="narrow-container">
-      <h1 className="login__title">
-        {isLogin ? dict[lang].loginPage.signInHeader : dict[lang].loginPage.signUpHeader}
-      </h1>
-      <p className="login__description">
-        {isLogin ? dict[lang].loginPage.signInText : dict[lang].loginPage.signUpText}
-      </p>
-      <form className="login__form">
-        {isLogin ? null : (
+    <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      viewport={{ once: true }}
+      transition={{ type: 'spring', stiffness: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+    >
+      <div className="narrow-container">
+        <h1 className="login__title">
+          {isLogin ? dict[lang].loginPage.signInHeader : dict[lang].loginPage.signUpHeader}
+        </h1>
+        <p className="login__description">
+          {isLogin ? dict[lang].loginPage.signInText : dict[lang].loginPage.signUpText}
+        </p>
+        <form className="login__form">
+          {isLogin ? null : (
+            <div className="login__form-field login__form-field_text">
+              <label htmlFor="name">
+                {dict[lang].forms.nameLabel}
+                <input
+                  className="registration__form_input"
+                  type="text"
+                  placeholder={dict[lang].forms.namePholder}
+                  id="name"
+                  value={name}
+                  onInput={handleNameInput}
+                />
+              </label>
+              {isNameValid ? null : (
+                <div className="login__invalid-field">{dict[lang].forms.nameLoginValid}</div>
+              )}
+            </div>
+          )}
           <div className="login__form-field login__form-field_text">
-            <label htmlFor="name">
-              {dict[lang].forms.nameLabel}
+            <label htmlFor="login">
+              {dict[lang].forms.loginLabel}
               <input
-                className="registration__form_input"
+                className="login__form_input"
                 type="text"
-                placeholder={dict[lang].forms.namePholder}
-                id="name"
-                value={name}
-                onInput={handleNameInput}
+                placeholder={dict[lang].forms.loginPholder}
+                id="login"
+                onInput={handleLoginInput}
               />
             </label>
-            {isNameValid ? null : (
+            {isLoginValid ? null : (
               <div className="login__invalid-field">{dict[lang].forms.nameLoginValid}</div>
             )}
           </div>
-        )}
-        <div className="login__form-field login__form-field_text">
-          <label htmlFor="login">
-            {dict[lang].forms.loginLabel}
+          <div className="login__form-field login__form-field_text">
+            <label htmlFor="password">
+              {dict[lang].forms.passwordLabel}
+              <input
+                className="login__form_input"
+                type="password"
+                placeholder={dict[lang].forms.passwordPholder}
+                id="password"
+                onInput={handlePasswordInput}
+                autoComplete="on"
+              />
+            </label>
+            {isPasswordValid ? null : (
+              <div className="login__invalid-field">{dict[lang].forms.passwordValid}</div>
+            )}
+          </div>
+          {isLogin ? (
             <input
-              className="login__form_input"
-              type="text"
-              placeholder={dict[lang].forms.loginPholder}
-              id="login"
-              onInput={handleLoginInput}
+              className={`login__form_submit ${isButtonDisabled ? 'temp-disabled' : ''}`}
+              type="submit"
+              value={dict[lang].buttons.signIn}
+              disabled={!(login && password)}
+              onClick={logIn}
             />
-          </label>
-          {isLoginValid ? null : (
-            <div className="login__invalid-field">{dict[lang].forms.nameLoginValid}</div>
-          )}
-        </div>
-        <div className="login__form-field login__form-field_text">
-          <label htmlFor="password">
-            {dict[lang].forms.passwordLabel}
+          ) : (
             <input
-              className="login__form_input"
-              type="password"
-              placeholder={dict[lang].forms.passwordPholder}
-              id="password"
-              onInput={handlePasswordInput}
-              autoComplete="on"
+              className={`login__form_submit ${isButtonDisabled ? 'temp-disabled' : ''}`}
+              type="submit"
+              value={dict[lang].buttons.signUp}
+              disabled={!(name && login && password)}
+              onClick={createUser}
             />
-          </label>
-          {isPasswordValid ? null : (
-            <div className="login__invalid-field">{dict[lang].forms.passwordValid}</div>
           )}
-        </div>
+        </form>
         {isLogin ? (
-          <input
-            className={`login__form_submit ${isButtonDisabled ? 'temp-disabled' : ''}`}
-            type="submit"
-            value={dict[lang].buttons.signIn}
-            disabled={!(login && password)}
-            onClick={logIn}
-          />
+          <p className="login__suggestion">
+            {dict[lang].loginPage.signInSuggestion}
+            <NavLink className="login__link" to="/registration">
+              <span className="reg-underline">{dict[lang].buttons.signUp}!</span>
+            </NavLink>
+          </p>
         ) : (
-          <input
-            className={`login__form_submit ${isButtonDisabled ? 'temp-disabled' : ''}`}
-            type="submit"
-            value={dict[lang].buttons.signUp}
-            disabled={!(name && login && password)}
-            onClick={createUser}
-          />
+          <p className="login__suggestion">
+            {dict[lang].loginPage.signInHeader}
+            <NavLink className="login__link" to="/login">
+              <span className="reg-underline">{dict[lang].buttons.signIn}!</span>
+            </NavLink>
+          </p>
         )}
-      </form>
-      {isLogin ? (
-        <p className="login__suggestion">
-          {dict[lang].loginPage.signInSuggestion}
-          <NavLink className="login__link" to="/registration">
-            <span className="reg-underline">{dict[lang].buttons.signUp}!</span>
-          </NavLink>
-        </p>
-      ) : (
-        <p className="login__suggestion">
-          {dict[lang].loginPage.signInHeader}
-          <NavLink className="login__link" to="/login">
-            <span className="reg-underline">{dict[lang].buttons.signIn}!</span>
-          </NavLink>
-        </p>
-      )}
-    </div>
+      </div>
+    </motion.div>
   );
 }
 

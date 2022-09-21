@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FORM_TIMEOUT, LS_TOKEN_KEY } from 'data/constants';
 import './SearchPage.scss';
 import { AppContext } from 'store/storeWrapper';
+import { motion } from 'framer-motion';
 import getAllTasks from '../../api/getAllTasks';
 import { SearchTaskResponse } from '../../data/interfaces';
 import SearchTaskInfo from '../../components/SearchTaskInfo/SearchTaskInfo';
@@ -48,47 +49,54 @@ export default function SearchPage() {
   };
 
   return (
-    <div className="narrow-container">
-      <h1 className="title">{dict[lang].searchTasks}</h1>
-      <div className="search-form-wrapper">
-        <form onSubmit={handleSubmit} className="search-form">
-          <input
-            type="text"
-            placeholder={dict[lang].searchTasksPholder}
-            className="search-res-query"
-            value={searchVal}
-            onChange={handleChange}
-          />
-          <button
-            type="submit"
-            className={`search-res-button ${isButtonDisabled ? 'temp-disabled' : ''}`}
-          >
-            {dict[lang].search}
-          </button>
-        </form>
+    <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      viewport={{ once: true }}
+      transition={{ type: 'spring', stiffness: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+    >
+      <div className="narrow-container">
+        <h1 className="title">{dict[lang].searchTasks}</h1>
+        <div className="search-form-wrapper">
+          <form onSubmit={handleSubmit} className="search-form">
+            <input
+              type="text"
+              placeholder={dict[lang].searchTasksPholder}
+              className="search-res-query"
+              value={searchVal}
+              onChange={handleChange}
+            />
+            <button
+              type="submit"
+              className={`search-res-button ${isButtonDisabled ? 'temp-disabled' : ''}`}
+            >
+              {dict[lang].search}
+            </button>
+          </form>
+        </div>
+        <div className="search-tasks-wrapper">
+          {tasks.length === 0 && <h3>{dict[lang].searchHeader}</h3>}
+          {tasks.length !== 0 && (
+            <h3>
+              {dict[lang].searchResults} {tasks.length}
+            </h3>
+          )}
+          {tasks.map((i) => (
+            <SearchTaskInfo
+              id={i.id}
+              title={i.title}
+              order={i.order}
+              description={i.description}
+              userId={i.userId}
+              user={i.user}
+              boardId={i.boardId}
+              columnId={i.columnId}
+              key={i.id}
+              loadTasks={loadTasks}
+            />
+          ))}
+        </div>
       </div>
-      <div className="search-tasks-wrapper">
-        {tasks.length === 0 && <h3>{dict[lang].searchHeader}</h3>}
-        {tasks.length !== 0 && (
-          <h3>
-            {dict[lang].searchResults} {tasks.length}
-          </h3>
-        )}
-        {tasks.map((i) => (
-          <SearchTaskInfo
-            id={i.id}
-            title={i.title}
-            order={i.order}
-            description={i.description}
-            userId={i.userId}
-            user={i.user}
-            boardId={i.boardId}
-            columnId={i.columnId}
-            key={i.id}
-            loadTasks={loadTasks}
-          />
-        ))}
-      </div>
-    </div>
+    </motion.div>
   );
 }

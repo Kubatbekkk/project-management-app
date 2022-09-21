@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AppContext } from 'store/storeWrapper';
+import { motion } from 'framer-motion';
 import { ApiUserQuery } from '../../data/interfaces';
 import updateUser from '../../api/updateUser';
 import ModalConfirm from '../../components/ModalConfirm/ModalConfirm';
@@ -61,7 +62,12 @@ function ProfilePage() {
   };
 
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0, y: -100 }}
+      viewport={{ once: true }}
+      transition={{ type: 'spring', stiffness: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+    >
       <div className="narrow-container profile-container">
         <UserInfo name={currName} login={currLogin} id={currId} />
         <div className="form-wrapper">
@@ -133,7 +139,7 @@ function ProfilePage() {
           modalCallback={onDelete}
         />
       )}
-    </>
+    </motion.div>
   );
 }
 
